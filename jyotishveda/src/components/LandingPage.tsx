@@ -19,7 +19,7 @@ interface LandingPageProps {
 
 export function LandingPage({ onLoginClick, onRegisterClick, onOpenDisclaimer, theme, toggleTheme }: LandingPageProps) {
   const [isChatOpen, setIsChatOpen] = useState(false);
-  const [messages, setMessages] = useState<{role: 'user' | 'assistant', content: string}[]>([
+  const [messages, setMessages] = useState<{ role: 'user' | 'assistant', content: string }[]>([
     { role: 'assistant', content: 'Namaste. I am JyotishVeda AI. How may the stars guide you today?' }
   ]);
   const [input, setInput] = useState('');
@@ -45,11 +45,11 @@ export function LandingPage({ onLoginClick, onRegisterClick, onOpenDisclaimer, t
 
   const handleSend = () => {
     if (!input.trim() || msgCount >= 10) return;
-    
+
     setMessages(prev => [...prev, { role: 'user', content: input }]);
     setMsgCount(prev => prev + 1);
     setInput('');
-    
+
     // Simulate AI response
     setTimeout(() => {
       setMessages(prev => [...prev, { role: 'assistant', content: "Please login to unlock deep AI analysis and detailed celestial wisdom." }]);
@@ -59,10 +59,10 @@ export function LandingPage({ onLoginClick, onRegisterClick, onOpenDisclaimer, t
   const handleAskAIForSign = (signName: string, promptText: string) => {
     setIsChatOpen(true);
     if (msgCount >= 10) return;
-    
+
     setMessages(prev => [...prev, { role: 'user', content: promptText }]);
     setMsgCount(prev => prev + 1);
-    
+
     setTimeout(() => {
       setMessages(prev => [...prev, { role: 'assistant', content: "Please login to unlock deep AI analysis and detailed celestial wisdom." }]);
     }, 1000);
@@ -71,13 +71,13 @@ export function LandingPage({ onLoginClick, onRegisterClick, onOpenDisclaimer, t
   return (
     <div className={`min-h-screen relative font-sans flex flex-col ${theme === 'dark' ? 'bg-[#0D0D0F] text-[#E5E1D8]' : 'bg-[#F0ECE1] text-[#0D0D0F]'}`}>
       {theme === 'dark' && <StarfieldBackground />}
-      
+
       {/* Navigation Bar */}
       <nav className={`sticky top-0 z-50 backdrop-blur-2xl transition-all duration-300 border-b ${theme === 'dark' ? 'bg-[#0D0D0F]/80 border-[#2A2A2E]/50' : 'bg-[#F9F7F1]/80 border-[#E5E1D8]/80'} shadow-sm`}>
         <div className="w-full px-4 sm:px-6 lg:px-8 max-w-screen-2xl mx-auto">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
-            <div 
+            <div
               onClick={() => scrollToSection('hero-section')}
               className="flex items-center space-x-3 cursor-pointer group"
             >
@@ -96,46 +96,42 @@ export function LandingPage({ onLoginClick, onRegisterClick, onOpenDisclaimer, t
 
             {/* Center Links (Desktop only) */}
             <div className={`hidden lg:flex items-center space-x-1 px-1.5 py-1.5 rounded-full border backdrop-blur-md shadow-inner ${theme === 'dark' ? 'bg-[#141418]/60 border-[#2A2A2E]' : 'bg-white/60 border-gray-200/50'}`}>
-              <button 
-                onClick={() => scrollToSection('hero-section')} 
-                className={`flex items-center space-x-1.5 px-4 py-2 rounded-full text-[13px] font-semibold transition-all cursor-pointer ${
-                  activeSection === 'hero-section' 
-                    ? 'text-[#0D0D0F] bg-[#C9A050] shadow-md shadow-[#C9A050]/20' 
+              <button
+                onClick={() => scrollToSection('hero-section')}
+                className={`flex items-center space-x-1.5 px-4 py-2 rounded-full text-[13px] font-semibold transition-all cursor-pointer ${activeSection === 'hero-section'
+                    ? 'text-[#0D0D0F] bg-[#C9A050] shadow-md shadow-[#C9A050]/20'
                     : theme === 'dark' ? 'text-[#9E9A90] hover:text-[#E5E1D8] hover:bg-white/5' : 'text-gray-600 hover:text-[#0D0D0F] hover:bg-black/5'
-                }`}
+                  }`}
               >
                 <Home className="w-3.5 h-3.5" />
                 <span>Home</span>
               </button>
-              <button 
-                onClick={() => scrollToSection('panjika-section')} 
-                className={`flex items-center space-x-1.5 px-4 py-2 rounded-full text-[13px] font-semibold transition-all cursor-pointer ${
-                  activeSection === 'panjika-section' 
-                    ? 'text-[#0D0D0F] bg-[#C9A050] shadow-md shadow-[#C9A050]/20' 
+              <button
+                onClick={() => scrollToSection('panjika-section')}
+                className={`flex items-center space-x-1.5 px-4 py-2 rounded-full text-[13px] font-semibold transition-all cursor-pointer ${activeSection === 'panjika-section'
+                    ? 'text-[#0D0D0F] bg-[#C9A050] shadow-md shadow-[#C9A050]/20'
                     : theme === 'dark' ? 'text-[#9E9A90] hover:text-[#E5E1D8] hover:bg-white/5' : 'text-gray-600 hover:text-[#0D0D0F] hover:bg-black/5'
-                }`}
+                  }`}
               >
                 <Calendar className="w-3.5 h-3.5" />
                 <span>Panjika</span>
               </button>
-              <button 
-                onClick={() => scrollToSection('zodiac-section')} 
-                className={`flex items-center space-x-1.5 px-4 py-2 rounded-full text-[13px] font-semibold transition-all cursor-pointer ${
-                  activeSection === 'zodiac-section' 
-                    ? 'text-[#0D0D0F] bg-[#C9A050] shadow-md shadow-[#C9A050]/20' 
+              <button
+                onClick={() => scrollToSection('zodiac-section')}
+                className={`flex items-center space-x-1.5 px-4 py-2 rounded-full text-[13px] font-semibold transition-all cursor-pointer ${activeSection === 'zodiac-section'
+                    ? 'text-[#0D0D0F] bg-[#C9A050] shadow-md shadow-[#C9A050]/20'
                     : theme === 'dark' ? 'text-[#9E9A90] hover:text-[#E5E1D8] hover:bg-white/5' : 'text-gray-600 hover:text-[#0D0D0F] hover:bg-black/5'
-                }`}
+                  }`}
               >
                 <Globe className="w-3.5 h-3.5" />
                 <span>Global Zodiac</span>
               </button>
-              <button 
-                onClick={() => scrollToSection('premium-section')} 
-                className={`flex items-center space-x-1.5 px-4 py-2 rounded-full text-[13px] font-semibold transition-all cursor-pointer ${
-                  activeSection === 'premium-section' 
-                    ? 'text-[#0D0D0F] bg-[#C9A050] shadow-md shadow-[#C9A050]/20' 
+              <button
+                onClick={() => scrollToSection('premium-section')}
+                className={`flex items-center space-x-1.5 px-4 py-2 rounded-full text-[13px] font-semibold transition-all cursor-pointer ${activeSection === 'premium-section'
+                    ? 'text-[#0D0D0F] bg-[#C9A050] shadow-md shadow-[#C9A050]/20'
                     : theme === 'dark' ? 'text-[#9E9A90] hover:text-[#E5E1D8] hover:bg-white/5' : 'text-gray-600 hover:text-[#0D0D0F] hover:bg-black/5'
-                }`}
+                  }`}
               >
                 <Lock className="w-3.5 h-3.5" />
                 <span>Premium</span>
@@ -146,30 +142,28 @@ export function LandingPage({ onLoginClick, onRegisterClick, onOpenDisclaimer, t
             <div className="flex items-center space-x-3">
               <button
                 onClick={toggleTheme}
-                className={`p-2.5 rounded-full transition-all border ${
-                  theme === 'dark'
+                className={`p-2.5 rounded-full transition-all border ${theme === 'dark'
                     ? 'bg-[#141418] border-[#2A2A2E] text-[#E5E1D8] hover:border-[#C9A050]/50'
                     : 'bg-white border-gray-200 text-gray-700 hover:border-[#C9A050]/50 shadow-sm'
-                }`}
+                  }`}
                 title="Toggle Theme"
               >
                 {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
               </button>
-              
+
               <div className="hidden sm:block w-px h-6 bg-gray-300 dark:bg-gray-700 mx-1"></div>
-              
+
               <button
                 onClick={onLoginClick}
-                className={`hidden sm:block px-5 py-2.5 rounded-full font-bold text-[13px] transition-all cursor-pointer border shadow-sm ${
-                  theme === 'dark'
+                className={`hidden sm:block px-5 py-2.5 rounded-full font-bold text-[13px] transition-all cursor-pointer border shadow-sm ${theme === 'dark'
                     ? 'bg-[#141418] border-[#2A2A2E] text-[#E5E1D8] hover:text-[#C9A050] hover:border-[#C9A050]/50'
                     : 'bg-white border-gray-200 text-[#0D0D0F] hover:text-[#8C6B28] hover:border-[#C9A050]/50'
-                }`}
+                  }`}
               >
                 Log In
               </button>
-              <button 
-                onClick={onRegisterClick} 
+              <button
+                onClick={onRegisterClick}
                 className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#C9A050] to-[#8C6B28] text-white font-bold text-[13px] hover:from-[#D4AF37] hover:to-[#A37B2F] transition-all cursor-pointer shadow-[0_0_15px_rgba(201,160,80,0.3)] hover:shadow-[0_0_20px_rgba(201,160,80,0.5)] hover:-translate-y-0.5"
               >
                 Get Started
@@ -181,12 +175,12 @@ export function LandingPage({ onLoginClick, onRegisterClick, onOpenDisclaimer, t
 
       {/* Main Content Area */}
       <main className="flex-1 overflow-y-auto overflow-x-hidden relative z-10 scroll-smooth">
-        
+
         {/* Universal Astrologer Background (Fixed across all sections) */}
         <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-          <div 
+          <div
             className="absolute inset-0 opacity-[0.08] dark:opacity-[0.18] bg-no-repeat bg-cover bg-center transition-opacity duration-700"
-            style={{ 
+            style={{
               backgroundImage: 'url(/astrologer_bg.jpg)',
               backgroundPosition: 'center center'
             }}
@@ -197,94 +191,94 @@ export function LandingPage({ onLoginClick, onRegisterClick, onOpenDisclaimer, t
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div id="hero-section" className="min-h-[calc(100vh-5rem)] py-8 lg:py-16 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          
-          {/* Left Column: Greetings */}
-          <div className="flex flex-col items-center lg:items-start text-center lg:text-left order-2 lg:order-1">
-            <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-[#C9A050]/20 to-transparent border border-[#C9A050]/30 text-[#C9A050] text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-md shadow-[0_0_15px_rgba(201,160,80,0.15)]">
-              <Compass className="w-4 h-4" />
-              <span>Authentic Vedic Oracle</span>
-            </div>
-            
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold leading-tight mb-6">
-              <span className={`${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
-                Decode Your Destiny with
-              </span>
-              <br />
-              <span className="inline-flex mt-2 items-center">
-                {"JYOTISH".split("").map((char, index) => (
+
+            {/* Left Column: Greetings */}
+            <div className="flex flex-col items-center lg:items-start text-center lg:text-left order-2 lg:order-1">
+              <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-[#C9A050]/20 to-transparent border border-[#C9A050]/30 text-[#C9A050] text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-md shadow-[0_0_15px_rgba(201,160,80,0.15)]">
+                <Compass className="w-4 h-4" />
+                <span>Authentic Vedic Oracle</span>
+              </div>
+
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold leading-tight mb-6">
+                <span className={`${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+                  Decode Your Destiny with
+                </span>
+                <br />
+                <span className="inline-flex mt-2 items-center">
+                  {"JYOTISH".split("").map((char, index) => (
+                    <motion.span
+                      key={index}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: index * 0.08, ease: "easeOut" }}
+                      className={`inline-block ${theme === 'dark' ? 'text-[#E5E1D8]' : 'text-[#0D0D0F]'}`}
+                    >
+                      {char}
+                    </motion.span>
+                  ))}
                   <motion.span
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.08, ease: "easeOut" }}
-                    className={`inline-block ${theme === 'dark' ? 'text-[#E5E1D8]' : 'text-[#0D0D0F]'}`}
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{
+                      opacity: [0, 1, 1, 0],
+                      y: [15, 0, 0, 15],
+                      textShadow: [
+                        "0px 0px 0px rgba(201,160,80,0)",
+                        "0px 0px 15px rgba(201,160,80,0.6)",
+                        "0px 0px 15px rgba(201,160,80,0.6)",
+                        "0px 0px 0px rgba(201,160,80,0)"
+                      ]
+                    }}
+                    transition={{
+                      duration: 2.5,
+                      repeat: Infinity,
+                      repeatDelay: 2.5,
+                      times: [0, 0.1, 0.8, 1],
+                      ease: "easeInOut"
+                    }}
+                    className="inline-block text-[#C9A050] font-sans ml-3 text-[1.1em] leading-none -mt-1"
                   >
-                    {char}
+                    वेद
                   </motion.span>
-                ))}
-                <motion.span
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ 
-                    opacity: [0, 1, 1, 0], 
-                    y: [15, 0, 0, 15],
-                    textShadow: [
-                      "0px 0px 0px rgba(201,160,80,0)",
-                      "0px 0px 15px rgba(201,160,80,0.6)",
-                      "0px 0px 15px rgba(201,160,80,0.6)",
-                      "0px 0px 0px rgba(201,160,80,0)"
-                    ]
-                  }}
-                  transition={{
-                    duration: 2.5,
-                    repeat: Infinity,
-                    repeatDelay: 2.5,
-                    times: [0, 0.1, 0.8, 1],
-                    ease: "easeInOut"
-                  }}
-                  className="inline-block text-[#C9A050] font-sans ml-3 text-[1.1em] leading-none -mt-1"
-                >
-                  वेद
-                </motion.span>
-              </span>
-            </h2>
-            
-            <p className={`max-w-xl text-lg sm:text-xl mb-10 leading-relaxed font-light ${theme === 'dark' ? 'text-[#D0CBC0]' : 'text-gray-700'}`}>
-              Harness the profound wisdom of ancient <strong className="font-semibold text-[#C9A050]">Vedic astrology</strong>. Receive highly personalized cosmic insights and numerology readings mapped directly to your unique stellar blueprint.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row items-center w-full sm:w-auto space-y-4 sm:space-y-0 sm:space-x-4">
-              <button onClick={onRegisterClick} className="w-full sm:w-auto flex items-center justify-center space-x-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#C9A050] to-[#8C6B28] text-white font-bold text-base hover:from-[#D4AF37] hover:to-[#A37B2F] transition-all cursor-pointer shadow-[0_0_20px_rgba(201,160,80,0.4)] hover:shadow-[0_0_30px_rgba(201,160,80,0.6)] hover:-translate-y-1">
-                <span>Unlock Your Future</span>
-                <Sparkles className="w-4 h-4" />
-              </button>
+                </span>
+              </h2>
+
+              <p className={`max-w-xl text-lg sm:text-xl mb-10 leading-relaxed font-light ${theme === 'dark' ? 'text-[#D0CBC0]' : 'text-gray-700'}`}>
+                Harness the profound wisdom of ancient <strong className="font-semibold text-[#C9A050]">Vedic astrology</strong>. Receive highly personalized cosmic insights and numerology readings mapped directly to your unique stellar blueprint.
+              </p>
+
+              <div className="flex flex-col sm:flex-row items-center w-full sm:w-auto space-y-4 sm:space-y-0 sm:space-x-4">
+                <button onClick={onRegisterClick} className="w-full sm:w-auto flex items-center justify-center space-x-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#C9A050] to-[#8C6B28] text-white font-bold text-base hover:from-[#D4AF37] hover:to-[#A37B2F] transition-all cursor-pointer shadow-[0_0_20px_rgba(201,160,80,0.4)] hover:shadow-[0_0_30px_rgba(201,160,80,0.6)] hover:-translate-y-1">
+                  <span>Unlock Your Future</span>
+                  <Sparkles className="w-4 h-4" />
+                </button>
+              </div>
             </div>
-          </div>
-          
-          {/* Right Column: Hero Spinning Zodiac Wheel */}
-          <div className="relative group flex justify-center lg:justify-end order-1 lg:order-2 overflow-visible">
-            <div className="absolute inset-0 bg-[#C9A050]/20 rounded-full blur-[60px] opacity-60 group-hover:opacity-100 transition-opacity duration-700 lg:translate-x-16"></div>
-            
-            {/* The wheel container */}
-            <div className="relative w-72 h-72 sm:w-96 sm:h-96 lg:w-[500px] lg:h-[500px] flex items-center justify-center lg:translate-x-[15%]">
-              <img 
-                src="/white_zodiac_wheel.png" 
-                alt="JyotishVeda Zodiac Wheel" 
-                className="w-full h-full object-cover rounded-full shadow-[0_0_60px_rgba(201,160,80,0.4)] border border-[#C9A050]/40 relative z-10"
-                style={{ animation: 'spin 60s linear infinite' }}
-              />
-              
-              {/* JYOTISHVEDA Center Overlay to cover "A.I." */}
-              <div className="absolute z-20 flex flex-col items-center justify-center pointer-events-none">
-                <div className="bg-[#0b0c10] border border-[#C9A050]/80 shadow-[0_0_30px_rgba(201,160,80,0.5)] rounded-full w-24 h-24 sm:w-32 sm:h-32 flex items-center justify-center backdrop-blur-md">
-                  <span className="text-[#C9A050] font-serif font-bold text-[10px] sm:text-xs tracking-[0.2em] text-center px-2 flex flex-col items-center">
-                    <span>JYOTISH</span>
-                    <span className="font-sans text-sm sm:text-base tracking-normal mt-0.5">वेद</span>
-                  </span>
+
+            {/* Right Column: Hero Spinning Zodiac Wheel */}
+            <div className="relative group flex justify-center lg:justify-end order-1 lg:order-2 overflow-visible">
+              <div className="absolute inset-0 bg-[#C9A050]/20 rounded-full blur-[60px] opacity-60 group-hover:opacity-100 transition-opacity duration-700 lg:translate-x-16"></div>
+
+              {/* The wheel container */}
+              <div className="relative w-72 h-72 sm:w-96 sm:h-96 lg:w-[500px] lg:h-[500px] flex items-center justify-center lg:translate-x-[15%]">
+                <img
+                  src="/white_zodiac_wheel.png"
+                  alt="JyotishVeda Zodiac Wheel"
+                  className="w-full h-full object-cover rounded-full shadow-[0_0_60px_rgba(201,160,80,0.4)] border border-[#C9A050]/40 relative z-10"
+                  style={{ animation: 'spin 60s linear infinite' }}
+                />
+
+                {/* JYOTISHVEDA Center Overlay to cover "A.I." */}
+                <div className="absolute z-20 flex flex-col items-center justify-center pointer-events-none">
+                  <div className="bg-[#0b0c10] border border-[#C9A050]/80 shadow-[0_0_30px_rgba(201,160,80,0.5)] rounded-full w-24 h-24 sm:w-32 sm:h-32 flex items-center justify-center backdrop-blur-md">
+                    <span className="text-[#C9A050] font-serif font-bold text-[10px] sm:text-xs tracking-[0.2em] text-center px-2 flex flex-col items-center">
+                      <span>JYOTISH</span>
+                      <span className="font-sans text-sm sm:text-base tracking-normal mt-0.5">वेद</span>
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>  
 
           {/* Side-by-side Layout for Panjika and Zodiac on larger screens */}
           <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 pt-6 pb-12 items-start">
@@ -293,10 +287,10 @@ export function LandingPage({ onLoginClick, onRegisterClick, onOpenDisclaimer, t
               <PanjikaCalendarView theme={theme} />
               <ZodiacCompatibilityMatrix theme={theme} />
             </div>
-            
+
             {/* Full Global Zodiac Section (Takes more width to prevent squishing) */}
             <div id="zodiac-section" className="w-full lg:w-[60%] xl:w-[65%] text-left">
-              <GlobalZodiacView 
+              <GlobalZodiacView
                 theme={theme}
                 onAskAIForSign={handleAskAIForSign}
               />
@@ -314,19 +308,18 @@ export function LandingPage({ onLoginClick, onRegisterClick, onOpenDisclaimer, t
                 Log in to access your deeply personalized astrological and numerological journey.
               </p>
             </div>
-            
+
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {PREMIUM_FEATURES_CATALOG.map((feat) => {
                 const Icon = feat.icon;
                 return (
-                  <div 
+                  <div
                     key={feat.id}
                     onClick={() => setSelectedFeatureForPreview(feat)}
-                    className={`relative overflow-hidden rounded-2xl p-6 text-left cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-[#C9A050]/20 group ${
-                      theme === 'dark' 
-                        ? 'bg-white/5 border border-white/10 backdrop-blur-md hover:border-[#C9A050]/50' 
+                    className={`relative overflow-hidden rounded-2xl p-6 text-left cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-[#C9A050]/20 group ${theme === 'dark'
+                        ? 'bg-white/5 border border-white/10 backdrop-blur-md hover:border-[#C9A050]/50'
                         : 'bg-white/40 border border-white/60 backdrop-blur-md shadow-sm hover:border-[#C9A050]/50'
-                    }`}
+                      }`}
                   >
                     {/* Glassmorphism Video Demo Preview Overlay on Hover */}
                     <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/65 backdrop-blur-[3px] p-4 text-center">
@@ -384,7 +377,7 @@ export function LandingPage({ onLoginClick, onRegisterClick, onOpenDisclaimer, t
       <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
         <AnimatePresence>
           {isChatOpen && (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.95 }}
@@ -399,7 +392,7 @@ export function LandingPage({ onLoginClick, onRegisterClick, onOpenDisclaimer, t
                   <X className="w-4 h-4" />
                 </button>
               </div>
-              
+
               <div className={`h-[300px] p-3 overflow-y-auto flex flex-col space-y-3 text-xs ${theme === 'dark' ? 'bg-[#0D0D0F]' : 'bg-[#F0ECE1]/50'}`}>
                 {messages.map((m, i) => (
                   <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
@@ -410,11 +403,11 @@ export function LandingPage({ onLoginClick, onRegisterClick, onOpenDisclaimer, t
                   </div>
                 ))}
               </div>
-              
+
               <div className={`p-3 border-t flex flex-col ${theme === 'dark' ? 'bg-[#141418] border-[#2A2A2E]' : 'bg-[#FFFFFF] border-[#E5E1D8]'}`}>
                 <div className="flex items-center space-x-2">
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={(e) => e.key === 'Enter' && handleSend()}
@@ -422,7 +415,7 @@ export function LandingPage({ onLoginClick, onRegisterClick, onOpenDisclaimer, t
                     disabled={msgCount >= 10}
                     className={`flex-1 px-3 py-1.5 text-xs rounded-lg border focus:outline-none focus:border-[#C9A050] disabled:opacity-50 ${theme === 'dark' ? 'bg-[#1A1A1E] border-[#2A2A2E] text-[#F0ECE1]' : 'bg-[#F0ECE1] border-[#E5E1D8] text-[#0D0D0F]'}`}
                   />
-                  <button 
+                  <button
                     onClick={handleSend}
                     disabled={msgCount >= 10 || !input.trim()}
                     className="p-1.5 rounded-lg bg-[#C9A050] text-[#0D0D0F] disabled:opacity-50 cursor-pointer hover:bg-[#D4AF37] transition"
@@ -437,9 +430,9 @@ export function LandingPage({ onLoginClick, onRegisterClick, onOpenDisclaimer, t
             </motion.div>
           )}
         </AnimatePresence>
-        
+
         {!isChatOpen && (
-          <button 
+          <button
             onClick={() => setIsChatOpen(true)}
             className="w-12 h-12 rounded-full bg-[#C9A050] text-[#0D0D0F] flex items-center justify-center shadow-lg shadow-[#C9A050]/30 hover:scale-105 transition cursor-pointer"
           >
@@ -450,3 +443,7 @@ export function LandingPage({ onLoginClick, onRegisterClick, onOpenDisclaimer, t
     </div>
   );
 }
+
+
+
+
