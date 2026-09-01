@@ -259,21 +259,21 @@ export const FeaturePreviewModal: React.FC<FeaturePreviewModalProps> = ({
                 <div className={`flex-1 py-1 px-1.5 rounded-md text-center border transition-all ${
                   currentSceneIndex === 1
                     ? 'bg-[#C9A050] text-[#0D0D0F] border-[#C9A050] shadow-xs'
-                    : 'bg-black/5 dark:bg-white/5 border-transparent text-gray-500'
+                    : isDark ? 'bg-white/5 border-transparent text-gray-400' : 'bg-black/5 border-transparent text-gray-700'
                 }`}>
                   1. Ephemeris Scan
                 </div>
                 <div className={`flex-1 py-1 px-1.5 rounded-md text-center border transition-all ${
                   currentSceneIndex === 2
                     ? 'bg-[#C9A050] text-[#0D0D0F] border-[#C9A050] shadow-xs'
-                    : 'bg-black/5 dark:bg-white/5 border-transparent text-gray-500'
+                    : isDark ? 'bg-white/5 border-transparent text-gray-400' : 'bg-black/5 border-transparent text-gray-700'
                 }`}>
                   2. Live Computation
                 </div>
                 <div className={`flex-1 py-1 px-1.5 rounded-md text-center border transition-all ${
                   currentSceneIndex === 3
                     ? 'bg-[#C9A050] text-[#0D0D0F] border-[#C9A050] shadow-xs'
-                    : 'bg-black/5 dark:bg-white/5 border-transparent text-gray-500'
+                    : isDark ? 'bg-white/5 border-transparent text-gray-400' : 'bg-black/5 border-transparent text-gray-700'
                 }`}>
                   3. Vedic Synthesis
                 </div>
@@ -551,8 +551,8 @@ export const FeaturePreviewModal: React.FC<FeaturePreviewModalProps> = ({
               }`}>
                 {feature.specs.map((spec, i) => (
                   <div key={i} className="flex flex-col">
-                    <span className="text-[10px] font-semibold text-[#78716C] dark:text-[#9E9A90] uppercase tracking-wider">{spec.label}</span>
-                    <span className="font-bold text-xs text-[#8C6B28] dark:text-[#C9A050]">{spec.value}</span>
+                    <span className={`text-[10px] font-semibold uppercase tracking-wider ${isDark ? 'text-[#9E9A90]' : 'text-[#78716C]'}`}>{spec.label}</span>
+                    <span className={`font-bold text-xs ${isDark ? 'text-[#C9A050]' : 'text-[#8C6B28]'}`}>{spec.value}</span>
                   </div>
                 ))}
               </div>
@@ -562,18 +562,18 @@ export const FeaturePreviewModal: React.FC<FeaturePreviewModalProps> = ({
             <div className="lg:col-span-6 flex flex-col justify-between space-y-4">
               <div className="space-y-3.5">
                 <div>
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#8C6B28] dark:text-[#C9A050] mb-1.5">
+                  <h4 className={`text-xs font-bold uppercase tracking-wider mb-1.5 ${isDark ? 'text-[#C9A050]' : 'text-[#8C6B28]'}`}>
                     Feature Overview
                   </h4>
                   {/* High Contrast, Crystal Clear Text */}
-                  <p className="text-xs sm:text-sm leading-relaxed text-[#1C1917] dark:text-[#E5E1D8] font-normal">
+                  <p className={`text-xs sm:text-sm leading-relaxed font-normal ${isDark ? 'text-[#E5E1D8]' : 'text-gray-900'}`}>
                     {feature.fullDescription}
                   </p>
                 </div>
 
                 {/* Key Benefits List (Sharp, Distinct Cards) */}
                 <div>
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#8C6B28] dark:text-[#C9A050] mb-2">
+                  <h4 className={`text-xs font-bold uppercase tracking-wider mb-2 ${isDark ? 'text-[#C9A050]' : 'text-[#8C6B28]'}`}>
                     What You Get After Unlocking:
                   </h4>
                   <div className="space-y-2">
@@ -586,8 +586,8 @@ export const FeaturePreviewModal: React.FC<FeaturePreviewModalProps> = ({
                             : 'bg-white border-[#D4CFC4] hover:border-[#C9A050]/50 shadow-xs'
                         }`}
                       >
-                        <CheckCircle2 className="w-4 h-4 text-[#8C6B28] dark:text-[#C9A050] shrink-0 mt-0.5" />
-                        <span className="text-xs font-semibold text-[#1C1917] dark:text-[#E5E1D8] leading-snug">
+                        <CheckCircle2 className={`w-4 h-4 shrink-0 mt-0.5 ${isDark ? 'text-[#C9A050]' : 'text-[#8C6B28]'}`} />
+                        <span className={`text-xs font-semibold leading-snug ${isDark ? 'text-[#E5E1D8]' : 'text-gray-900'}`}>
                           {benefit}
                         </span>
                       </div>
@@ -602,11 +602,11 @@ export const FeaturePreviewModal: React.FC<FeaturePreviewModalProps> = ({
                   ? 'bg-gradient-to-br from-[#1C1A14] to-[#121216] border-[#C9A050]/35'
                   : 'bg-gradient-to-br from-[#FDFBF7] to-[#F5EFE0] border-[#C9A050]/40 shadow-sm'
               }`}>
-                <div className="flex items-center space-x-2 mb-1.5 text-xs font-bold text-[#8C6B28] dark:text-[#C9A050]">
+                <div className={`flex items-center space-x-2 mb-1.5 text-xs font-bold ${isDark ? 'text-[#C9A050]' : 'text-[#8C6B28]'}`}>
                   <Lock className="w-3.5 h-3.5" />
                   <span>Access Requires Authentication</span>
                 </div>
-                <p className="text-xs text-[#57534E] dark:text-[#9E9A90] mb-3 font-medium">
+                <p className={`text-xs mb-3 font-medium ${isDark ? 'text-[#9E9A90]' : 'text-[#57534E]'}`}>
                   Log in with your JyotishVeda account to immediately access full calculations, personalized charts, and AI consults.
                 </p>
 
