@@ -5,6 +5,7 @@ import { ZODIAC_SIGNS } from '../services/zodiacData';
 import { StarfieldBackground } from './StarfieldBackground';
 import { GlobalZodiacView } from './GlobalZodiacView';
 import PanjikaCalendarView from './PanjikaCalendarView';
+import { ZodiacCompatibilityMatrix } from './ZodiacCompatibilityMatrix';
 import { Footer } from './Footer';
 import { FeaturePreviewModal, PREMIUM_FEATURES_CATALOG, PremiumFeatureDetail } from './FeaturePreviewModal';
 
@@ -72,189 +73,202 @@ export function LandingPage({ onLoginClick, onRegisterClick, onOpenDisclaimer, t
       {theme === 'dark' && <StarfieldBackground />}
       
       {/* Navigation Bar */}
-      <nav className={`sticky top-0 z-40 backdrop-blur-xl border-b transition-colors duration-300 shadow-md ${theme === 'dark' ? 'bg-[#0D0D0F]/80 border-[#2A2A2E]/80 text-[#E5E1D8]' : 'bg-[#F9F7F1]/85 border-[#E5E1D8] text-[#0D0D0F]'}`}>
-        <div className="w-full px-4 sm:px-6 lg:px-10">
+      <nav className={`sticky top-0 z-50 backdrop-blur-2xl transition-all duration-300 border-b ${theme === 'dark' ? 'bg-[#0D0D0F]/80 border-[#2A2A2E]/50' : 'bg-[#F9F7F1]/80 border-[#E5E1D8]/80'} shadow-sm`}>
+        <div className="w-full px-4 sm:px-6 lg:px-8 max-w-screen-2xl mx-auto">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <div 
               onClick={() => scrollToSection('hero-section')}
               className="flex items-center space-x-3 cursor-pointer group"
             >
-              <div className="w-10 h-10 rounded-full bg-[#C9A050]/15 border border-[#C9A050]/50 flex items-center justify-center group-hover:bg-[#C9A050]/20 transition-colors">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#C9A050]/20 to-transparent border border-[#C9A050]/50 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
                 <Sparkles className="w-5 h-5 text-[#C9A050]" />
               </div>
               <div>
-                <h1 className="text-xl font-serif font-bold tracking-wider">
-                  JYOTISH<span className="text-[#C9A050]">VEDA</span>
+                <h1 className="text-xl font-serif font-bold tracking-wider flex items-center">
+                  JYOTISH<span className="text-[#C9A050] font-sans ml-1 text-[22px] leading-none mb-0.5">वेद</span>
                 </h1>
                 <p className={`text-[9px] font-bold tracking-widest uppercase mt-0.5 ${theme === 'dark' ? 'text-[#9E9A90]' : 'text-gray-500'}`}>
-                  AI Astrological Wisdom
+                  Authentic Vedic Wisdom
                 </p>
               </div>
             </div>
 
             {/* Center Links (Desktop only) */}
-            <div className="hidden md:flex items-center space-x-2">
+            <div className={`hidden lg:flex items-center space-x-1 px-1.5 py-1.5 rounded-full border backdrop-blur-md shadow-inner ${theme === 'dark' ? 'bg-[#141418]/60 border-[#2A2A2E]' : 'bg-white/60 border-gray-200/50'}`}>
               <button 
                 onClick={() => scrollToSection('hero-section')} 
-                className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-sm font-semibold transition-all cursor-pointer ${
+                className={`flex items-center space-x-1.5 px-4 py-2 rounded-full text-[13px] font-semibold transition-all cursor-pointer ${
                   activeSection === 'hero-section' 
-                    ? 'text-[#C9A050] bg-[#C9A050]/15 shadow-sm' 
-                    : theme === 'dark' ? 'text-[#9E9A90] hover:text-[#E5E1D8] hover:bg-[#1A1A1E]' : 'text-gray-600 hover:text-[#0D0D0F] hover:bg-black/5'
+                    ? 'text-[#0D0D0F] bg-[#C9A050] shadow-md shadow-[#C9A050]/20' 
+                    : theme === 'dark' ? 'text-[#9E9A90] hover:text-[#E5E1D8] hover:bg-white/5' : 'text-gray-600 hover:text-[#0D0D0F] hover:bg-black/5'
                 }`}
               >
-                <Home className="w-4 h-4" />
+                <Home className="w-3.5 h-3.5" />
                 <span>Home</span>
               </button>
               <button 
                 onClick={() => scrollToSection('panjika-section')} 
-                className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-sm font-semibold transition-all cursor-pointer ${
+                className={`flex items-center space-x-1.5 px-4 py-2 rounded-full text-[13px] font-semibold transition-all cursor-pointer ${
                   activeSection === 'panjika-section' 
-                    ? 'text-[#C9A050] bg-[#C9A050]/15 shadow-sm' 
-                    : theme === 'dark' ? 'text-[#9E9A90] hover:text-[#E5E1D8] hover:bg-[#1A1A1E]' : 'text-gray-600 hover:text-[#0D0D0F] hover:bg-black/5'
+                    ? 'text-[#0D0D0F] bg-[#C9A050] shadow-md shadow-[#C9A050]/20' 
+                    : theme === 'dark' ? 'text-[#9E9A90] hover:text-[#E5E1D8] hover:bg-white/5' : 'text-gray-600 hover:text-[#0D0D0F] hover:bg-black/5'
                 }`}
               >
-                <Calendar className="w-4 h-4" />
-                <span>Panjika & Calendar</span>
+                <Calendar className="w-3.5 h-3.5" />
+                <span>Panjika</span>
               </button>
               <button 
                 onClick={() => scrollToSection('zodiac-section')} 
-                className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-sm font-semibold transition-all cursor-pointer ${
+                className={`flex items-center space-x-1.5 px-4 py-2 rounded-full text-[13px] font-semibold transition-all cursor-pointer ${
                   activeSection === 'zodiac-section' 
-                    ? 'text-[#C9A050] bg-[#C9A050]/15 shadow-sm' 
-                    : theme === 'dark' ? 'text-[#9E9A90] hover:text-[#E5E1D8] hover:bg-[#1A1A1E]' : 'text-gray-600 hover:text-[#0D0D0F] hover:bg-black/5'
+                    ? 'text-[#0D0D0F] bg-[#C9A050] shadow-md shadow-[#C9A050]/20' 
+                    : theme === 'dark' ? 'text-[#9E9A90] hover:text-[#E5E1D8] hover:bg-white/5' : 'text-gray-600 hover:text-[#0D0D0F] hover:bg-black/5'
                 }`}
               >
-                <Globe className="w-4 h-4" />
+                <Globe className="w-3.5 h-3.5" />
                 <span>Global Zodiac</span>
               </button>
               <button 
                 onClick={() => scrollToSection('premium-section')} 
-                className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-sm font-semibold transition-all cursor-pointer ${
+                className={`flex items-center space-x-1.5 px-4 py-2 rounded-full text-[13px] font-semibold transition-all cursor-pointer ${
                   activeSection === 'premium-section' 
-                    ? 'text-[#C9A050] bg-[#C9A050]/15 shadow-sm' 
-                    : theme === 'dark' ? 'text-[#9E9A90] hover:text-[#E5E1D8] hover:bg-[#1A1A1E]' : 'text-gray-600 hover:text-[#0D0D0F] hover:bg-black/5'
+                    ? 'text-[#0D0D0F] bg-[#C9A050] shadow-md shadow-[#C9A050]/20' 
+                    : theme === 'dark' ? 'text-[#9E9A90] hover:text-[#E5E1D8] hover:bg-white/5' : 'text-gray-600 hover:text-[#0D0D0F] hover:bg-black/5'
                 }`}
               >
-                <Lock className="w-4 h-4" />
+                <Lock className="w-3.5 h-3.5" />
                 <span>Premium</span>
               </button>
             </div>
 
             {/* Right Controls */}
-            <div className="flex items-center space-x-2 sm:space-x-4">
+            <div className="flex items-center space-x-3">
               <button
                 onClick={toggleTheme}
-                className={`p-2 rounded-lg transition-colors border ${
+                className={`p-2.5 rounded-full transition-all border ${
                   theme === 'dark'
                     ? 'bg-[#141418] border-[#2A2A2E] text-[#E5E1D8] hover:border-[#C9A050]/50'
-                    : 'bg-white border-[#E5E1D8] text-[#2A2A2E] hover:border-[#C9A050]/50 shadow-sm'
+                    : 'bg-white border-gray-200 text-gray-700 hover:border-[#C9A050]/50 shadow-sm'
                 }`}
                 title="Toggle Theme"
               >
                 {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
               </button>
               
-              <div className="hidden sm:block w-px h-6 bg-[#C9A050]/30 mx-2"></div>
+              <div className="hidden sm:block w-px h-6 bg-gray-300 dark:bg-gray-700 mx-1"></div>
               
               <button
                 onClick={onLoginClick}
-                className={`px-4 py-2 rounded-lg font-bold text-sm transition-all cursor-pointer border shadow-sm ${
+                className={`hidden sm:block px-5 py-2.5 rounded-full font-bold text-[13px] transition-all cursor-pointer border shadow-sm ${
                   theme === 'dark'
-                    ? 'bg-[#141418] border-[#2A2A2E] text-[#E5E1D8] hover:text-[#C9A050] hover:border-[#C9A050] hover:bg-[#C9A050]/10 hover:shadow-md'
-                    : 'bg-white border-[#D4CFC4] text-[#0D0D0F] hover:text-[#8C6B28] hover:border-[#C9A050] hover:bg-[#C9A050]/15 hover:shadow-md'
+                    ? 'bg-[#141418] border-[#2A2A2E] text-[#E5E1D8] hover:text-[#C9A050] hover:border-[#C9A050]/50'
+                    : 'bg-white border-gray-200 text-[#0D0D0F] hover:text-[#8C6B28] hover:border-[#C9A050]/50'
                 }`}
               >
                 Log In
               </button>
-              <button onClick={onRegisterClick} className="px-4 py-2 rounded-lg bg-[#C9A050] text-[#0D0D0F] font-bold text-sm hover:bg-[#D4AF37] transition-all cursor-pointer shadow-lg shadow-[#C9A050]/20 hover:-translate-y-0.5">Get Started</button>
+              <button 
+                onClick={onRegisterClick} 
+                className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#C9A050] to-[#8C6B28] text-white font-bold text-[13px] hover:from-[#D4AF37] hover:to-[#A37B2F] transition-all cursor-pointer shadow-[0_0_15px_rgba(201,160,80,0.3)] hover:shadow-[0_0_20px_rgba(201,160,80,0.5)] hover:-translate-y-0.5"
+              >
+                Get Started
+              </button>
             </div>
           </div>
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <main className="flex-1 overflow-y-auto relative z-10 pb-20 scroll-smooth">
-        <div className="max-w-7xl mx-auto px-6">
+      {/* Main Content Area */}
+      <main className="flex-1 overflow-y-auto overflow-x-hidden relative z-10 scroll-smooth">
+        
+        {/* Universal Astrologer Background (Fixed across all sections) */}
+        <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+          <div 
+            className="absolute inset-0 opacity-[0.08] dark:opacity-[0.18] bg-no-repeat bg-cover bg-center transition-opacity duration-700"
+            style={{ 
+              backgroundImage: 'url(/astrologer_bg.jpg)',
+              backgroundPosition: 'center center'
+            }}
+          ></div>
+          {/* Subtle gradient to fade the background slightly at the bottom of the screen */}
+          <div className={`absolute inset-0 bg-gradient-to-b from-transparent via-transparent ${theme === 'dark' ? 'to-[#0D0D0F]/90' : 'to-[#F0ECE1]/90'}`}></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div id="hero-section" className="min-h-[calc(100vh-5rem)] py-8 lg:py-16 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           
           {/* Left Column: Greetings */}
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left order-2 lg:order-1">
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#C9A050]/10 border border-[#C9A050]/20 text-[#C9A050] text-xs font-bold uppercase tracking-widest mb-6">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Ancient Wisdom Meets AI</span>
+            <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-[#C9A050]/20 to-transparent border border-[#C9A050]/30 text-[#C9A050] text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-md shadow-[0_0_15px_rgba(201,160,80,0.15)]">
+              <Compass className="w-4 h-4" />
+              <span>Authentic Vedic Oracle</span>
             </div>
             
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold leading-tight mb-6">
-              Welcome to <br />
-              <span className="inline-flex">
-                {"JYOTISHVEDA".split("").map((char, index) => {
-                  if (index <= 6) { // JYOTISH
-                    return (
-                      <motion.span
-                        key={index}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: index * 0.08, ease: "easeOut" }}
-                        className={`inline-block ${theme === 'dark' ? 'text-[#E5E1D8]' : 'text-[#0D0D0F]'}`}
-                      >
-                        {char}
-                      </motion.span>
-                    );
-                  }
-
-                  // VEDA
-                  const vedaIndex = index - 7;
-                  return (
-                    <motion.span
-                      key={index}
-                      initial={{ opacity: 0, y: 15 }}
-                      animate={{ 
-                        opacity: [0, 1, 1, 0], 
-                        y: [15, 0, 0, 15],
-                        textShadow: [
-                          "0px 0px 0px rgba(201,160,80,0)",
-                          "0px 0px 10px rgba(201,160,80,0.5)",
-                          "0px 0px 10px rgba(201,160,80,0.5)",
-                          "0px 0px 0px rgba(201,160,80,0)"
-                        ]
-                      }}
-                      transition={{
-                        duration: 2.5,
-                        repeat: Infinity,
-                        repeatDelay: 2.5,
-                        delay: vedaIndex * 0.3,
-                        times: [0, 0.1, 0.8, 1],
-                        ease: "easeInOut"
-                      }}
-                      className="inline-block text-[#C9A050]"
-                    >
-                      {char}
-                    </motion.span>
-                  );
-                })}
+              <span className={`${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+                Decode Your Destiny with
+              </span>
+              <br />
+              <span className="inline-flex mt-2 items-center">
+                {"JYOTISH".split("").map((char, index) => (
+                  <motion.span
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.08, ease: "easeOut" }}
+                    className={`inline-block ${theme === 'dark' ? 'text-[#E5E1D8]' : 'text-[#0D0D0F]'}`}
+                  >
+                    {char}
+                  </motion.span>
+                ))}
+                <motion.span
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ 
+                    opacity: [0, 1, 1, 0], 
+                    y: [15, 0, 0, 15],
+                    textShadow: [
+                      "0px 0px 0px rgba(201,160,80,0)",
+                      "0px 0px 15px rgba(201,160,80,0.6)",
+                      "0px 0px 15px rgba(201,160,80,0.6)",
+                      "0px 0px 0px rgba(201,160,80,0)"
+                    ]
+                  }}
+                  transition={{
+                    duration: 2.5,
+                    repeat: Infinity,
+                    repeatDelay: 2.5,
+                    times: [0, 0.1, 0.8, 1],
+                    ease: "easeInOut"
+                  }}
+                  className="inline-block text-[#C9A050] font-sans ml-3 text-[1.1em] leading-none -mt-1"
+                >
+                  वेद
+                </motion.span>
               </span>
             </h2>
             
-            <p className={`max-w-xl text-base sm:text-lg mb-8 leading-relaxed ${theme === 'dark' ? 'text-[#9E9A90]' : 'text-gray-600'}`}>
-              Experience the profound synergy of authentic Vedic Astrology, intricate Numerology, and cutting-edge Artificial Intelligence tailored just for you.
+            <p className={`max-w-xl text-lg sm:text-xl mb-10 leading-relaxed font-light ${theme === 'dark' ? 'text-[#D0CBC0]' : 'text-gray-700'}`}>
+              Harness the profound wisdom of ancient <strong className="font-semibold text-[#C9A050]">Vedic astrology</strong>. Receive highly personalized cosmic insights and numerology readings mapped directly to your unique stellar blueprint.
             </p>
             
             <div className="flex flex-col sm:flex-row items-center w-full sm:w-auto space-y-4 sm:space-y-0 sm:space-x-4">
-              <button onClick={onRegisterClick} className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-[#C9A050] text-[#0D0D0F] font-bold text-base hover:bg-[#D4AF37] transition-all cursor-pointer shadow-lg shadow-[#C9A050]/20 hover:-translate-y-1">
-                Get Started
+              <button onClick={onRegisterClick} className="w-full sm:w-auto flex items-center justify-center space-x-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#C9A050] to-[#8C6B28] text-white font-bold text-base hover:from-[#D4AF37] hover:to-[#A37B2F] transition-all cursor-pointer shadow-[0_0_20px_rgba(201,160,80,0.4)] hover:shadow-[0_0_30px_rgba(201,160,80,0.6)] hover:-translate-y-1">
+                <span>Unlock Your Future</span>
+                <Sparkles className="w-4 h-4" />
               </button>
             </div>
           </div>
           
-          {/* Right Column: Hero Spinning Zodiac AI Wheel */}
-          <div className="relative group flex justify-center order-1 lg:order-2">
-            <div className="absolute inset-0 bg-[#C9A050]/20 rounded-full blur-[60px] opacity-60 group-hover:opacity-100 transition-opacity duration-700"></div>
+          {/* Right Column: Hero Spinning Zodiac Wheel */}
+          <div className="relative group flex justify-center lg:justify-end order-1 lg:order-2 overflow-visible">
+            <div className="absolute inset-0 bg-[#C9A050]/20 rounded-full blur-[60px] opacity-60 group-hover:opacity-100 transition-opacity duration-700 lg:translate-x-16"></div>
             
-            <div className="relative w-72 h-72 sm:w-96 sm:h-96 lg:w-[450px] lg:h-[450px] flex items-center justify-center">
+            {/* The wheel container */}
+            <div className="relative w-72 h-72 sm:w-96 sm:h-96 lg:w-[500px] lg:h-[500px] flex items-center justify-center lg:translate-x-[15%]">
               <img 
-                src="/golden_zodiac_wheel.jpg" 
-                alt="JyotishVeda AI Zodiac Wheel" 
+                src="/white_zodiac_wheel.png" 
+                alt="JyotishVeda Zodiac Wheel" 
                 className="w-full h-full object-cover rounded-full shadow-[0_0_60px_rgba(201,160,80,0.4)] border border-[#C9A050]/40 relative z-10"
                 style={{ animation: 'spin 60s linear infinite' }}
               />
@@ -262,8 +276,9 @@ export function LandingPage({ onLoginClick, onRegisterClick, onOpenDisclaimer, t
               {/* JYOTISHVEDA Center Overlay to cover "A.I." */}
               <div className="absolute z-20 flex flex-col items-center justify-center pointer-events-none">
                 <div className="bg-[#0b0c10] border border-[#C9A050]/80 shadow-[0_0_30px_rgba(201,160,80,0.5)] rounded-full w-24 h-24 sm:w-32 sm:h-32 flex items-center justify-center backdrop-blur-md">
-                  <span className="text-[#C9A050] font-serif font-bold text-[10px] sm:text-xs tracking-[0.2em] text-center px-2">
-                    JYOTISH<br/>VEDA
+                  <span className="text-[#C9A050] font-serif font-bold text-[10px] sm:text-xs tracking-[0.2em] text-center px-2 flex flex-col items-center">
+                    <span>JYOTISH</span>
+                    <span className="font-sans text-sm sm:text-base tracking-normal mt-0.5">वेद</span>
                   </span>
                 </div>
               </div>
@@ -271,16 +286,21 @@ export function LandingPage({ onLoginClick, onRegisterClick, onOpenDisclaimer, t
           </div>
         </div>  
 
-          {/* Panjika & Calendar Section */}
-          <div id="panjika-section" className="w-full text-left pt-6 pb-10">
-            <PanjikaCalendarView theme={theme} />
-          </div>
-          {/* Full Global Zodiac Section */}
-          <div id="zodiac-section" className="w-full text-left pt-6 pb-12">
-            <GlobalZodiacView 
-              theme={theme}
-              onAskAIForSign={handleAskAIForSign}
-            />
+          {/* Side-by-side Layout for Panjika and Zodiac on larger screens */}
+          <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 pt-6 pb-12 items-start">
+            {/* Panjika & Calendar Section (Takes less width) */}
+            <div id="panjika-section" className="w-full lg:w-[40%] xl:w-[35%] text-left">
+              <PanjikaCalendarView theme={theme} />
+              <ZodiacCompatibilityMatrix theme={theme} />
+            </div>
+            
+            {/* Full Global Zodiac Section (Takes more width to prevent squishing) */}
+            <div id="zodiac-section" className="w-full lg:w-[60%] xl:w-[65%] text-left">
+              <GlobalZodiacView 
+                theme={theme}
+                onAskAIForSign={handleAskAIForSign}
+              />
+            </div>
           </div>
 
           {/* Premium Features Teaser (Locked Cards) */}

@@ -328,7 +328,7 @@ export const PanjikaCalendarView: React.FC<PanjikaCalendarViewProps> = ({ theme 
             ? 'bg-[#141418]/90 border-[#2A2A2E] shadow-black/40'
             : 'bg-[#FFFFFF]/90 border-[#E5E1D8] shadow-amber-900/5'
         }`}>
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="flex flex-wrap flex-col xl:flex-row xl:items-center justify-between gap-4">
             
             {/* Title: Panjika & Calendar */}
             <div className="flex items-center space-x-3">
@@ -343,7 +343,7 @@ export const PanjikaCalendarView: React.FC<PanjikaCalendarViewProps> = ({ theme 
             </div>
 
             {/* Standalone Distinct Tab Buttons / Cards */}
-            <div className="flex items-center space-x-2.5">
+            <div className="flex flex-wrap items-center gap-2.5">
               {/* Card 1: Calendar Button */}
               <button
                 onClick={() => handleTabSwitch('calendar')}
@@ -386,7 +386,7 @@ export const PanjikaCalendarView: React.FC<PanjikaCalendarViewProps> = ({ theme 
           }`}>
             
             {/* Calendar Controls & Month Header */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-[#C9A050]/20 mb-3">
+            <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-[#C9A050]/20 mb-3">
               
               {/* Modern Unified Month / Year Navigation Pill */}
               <div className={`inline-flex items-center p-0.5 rounded-xl border shadow-xs transition-all ${
@@ -462,7 +462,7 @@ export const PanjikaCalendarView: React.FC<PanjikaCalendarViewProps> = ({ theme 
               </div>
 
               {/* Language Dropdown Selector */}
-              <div className="flex items-center space-x-2 self-end sm:self-auto">
+              <div className="flex items-center space-x-2 w-full xl:w-auto mt-2 xl:mt-0">
                 <span className={`text-xs font-bold uppercase tracking-wider ${
                   isDark ? 'text-[#9E9A90]' : 'text-gray-500'
                 }`}>
